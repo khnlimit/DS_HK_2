@@ -29,7 +29,7 @@ in the same location in the terminal to serve up the pictures. You can combine t
 ```bash
 ipynb(){
 	nohup python -m SimpleHTTPServer >&/dev/null; 
-	ipython notebook --pylab inline; 
+	ipython notebook; 
 	sudo kill $(sudo lsof -t -i:8000);
 }
 ```
