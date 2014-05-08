@@ -11,7 +11,7 @@ OSX and Linux provide a better course experience, but it's possible to setup you
 
 ### Notebooks
 
-Lesson materials are distributed in iPython Notebooks. An index of the latest notebooks is available on the course page as [ga-students.github.io/DS_HK_2/](ga-students.github.io/DS_HK_2/).
+Lesson materials are distributed in iPython Notebooks. An index of the latest notebooks is available on the course page as [ga-students.github.io/DS_HK_2/](http://ga-students.github.io/DS_HK_2/).
 
 To run the notebooks locally, run 
 
