@@ -18,7 +18,7 @@ a new linear regression object!***
 
 # Using iPythons magic function to set the current cirectory to my bookmarked data directory
 
-mammals = pd.read_csv('./mammals.csv')
+mammals = pd.read_csv('Users/vickytang/DS_HK_2/data/mammals.csv')
 mammals['log_body'] = log(mammals['body'])
 mammals['log_brain'] = log(mammals['brain'])
 
