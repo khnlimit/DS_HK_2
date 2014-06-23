@@ -46,7 +46,7 @@ def quickstart():
     ITEMID2 = 1221   # godfather II
 
     # get movies similar to toy story
-    svd.similar(ITEMID1)
+    print svd.similar(ITEMID1)
 
     # get predicted rating for given user & movie
     MIN_RATING = 0.0
@@ -60,8 +60,8 @@ def quickstart():
     print 'predicted rating = {0}'.format(pred)
     print 'actual rating = {0}'.format(actual)
 
-    # which users should see Toy Story?
-    svd.recommend(ITEMID)
+    print 'which users should see Toy Story?:'
+    print svd.recommend(ITEMID)
     # [(283,  5.716264440514446),
     #  (3604, 5.6471765418323141),
     #  (5056, 5.6218800339214496),
@@ -117,3 +117,4 @@ if __name__ == '__main__':
     # ex1()
 
 # Example taken from: http://ocelma.net/software/python-recsys/build/html/quickstart.html
+
