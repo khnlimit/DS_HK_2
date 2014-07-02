@@ -1,0 +1,716 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\fnil\fcharset0 STIXGeneral-Regular;
+\f3\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red246\green246\blue246;\red85\green98\blue117;\red15\green88\blue0;
+\red0\green0\blue198;\red254\green0\blue8;\red0\green0\blue255;\red61\green118\blue87;\red38\green38\blue38;
+\red245\green245\blue245;\red171\green22\blue26;\red83\green83\blue83;\red120\green0\blue4;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12580\viewh13120\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 Overfitting\
+\
+Training data set\
+tough to generalize into testing data set\
+\
+Class 12 Monday June 9, 2014\
+\
+If you have 1000 dimensions, can reduce to 100 dimensions \
+Can reduced based on order of magnitude such as 10^3 to 10^2 then it becomes difficult to reduce further\
+\
+June 11, 2013\
+\
+Random Forest\
+\
+helps split \
+Not useful for noisy data\
+each center = 1 class\
+\
+max_depth= None (no restrictions for # depth) \
+\
+random forest is always used\
+\
+test out all the different ways\
+\
+Used as baseline compared to other methods\
+\
+prediction markets to collect data based on money\
+\
+illegal in the US\
+\
+decision markets: use prediction markets to make informed decisions\
+\
+Crowdsource public market decisions\
+\
+Watson use decision trees, decision trees on resources\
+\
+Kaggle competition throws random forest \
+\
+Excellent set of tutorials: Kaggle.com 101 \
+\
+91 * 3 = ran 273 trees from example \
+\
+3 features rows and 4 classifiers columns; each red is a particular tree; particular version of classifier; met dense; if they are overlapping; modeling that\
+\
+The bottom ones are more accurate\
+\
+Bottom row 3rd column is the closest estimate with 99% accurate\
+\
+Use PCA to generate two features\
+\
+Gain is marginal\
+\
+horizonal : actual\
+vertical: predicted\
+\
+add print authors below the matrix \
+\
+
+\b June 16, 2014\
+\
+R w/ Guy
+\b0 \
+\
+Slides\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+{\field{\*\fldinst{HYPERLINK "http://rpubs.com/slygent/statlearn"}}{\fldrslt \cf0 http://rpubs.com/slygent/statlearn}}\
+\
+college <- read.csv("http://www-bcf.usc.edu/~gareth/ISL/College.csv")\
+head(college)\
+college[,1]\
+head(college$X)\
+head(row.names(college))\
+row.names(college)<-college$X\
+head(row.names(college))\
+college$X<- NULL\
+summary(college)\
+pairs(college)\
+pairs(college[1:10,])\
+pairs(college[1:3,])\
+pairs(college[1:3,1:5])\
+pairs(college[,1:5])\
+pairs(college[1:10,])\
+\
+colnames(college)[1]\
+colnames(college)[2]\
+hist(college$Apps)\
+\
+Can use modeling and visualization\
+Guy can use for work\
+\
+Ex. Pfizers: for non clinical research\
+Clinical regulations: R is not preferred to be used\
+Use often in finance w/ R\
+prototype modeling and then have coder write up in Java or C++\
+\
+\pard\pardeftab720\sl680
+
+\f1\fs64 \cf0 \kerning1\expnd-4\expndtw-20
+Advertising\cb2 \kerning1\expnd-4\expndtw-20
+ \cf3 \cb1 \kerning1\expnd-4\expndtw-20
+<-\cf0 \cb2 \kerning1\expnd-4\expndtw-20
+ \cb1 \kerning1\expnd-4\expndtw-20
+read.csv\cf3 \kerning1\expnd-4\expndtw-20
+(\cf4 \kerning1\expnd-4\expndtw-20
+"http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv"\cf3 \kerning1\expnd-4\expndtw-20
+)\cf0 \cb2 \kerning1\expnd-4\expndtw-20
+\
+\cb1 \kerning1\expnd-4\expndtw-20
+head\cf3 \kerning1\expnd-4\expndtw-20
+(\cf0 \kerning1\expnd-4\expndtw-20
+Advertising\cb2 \kerning1\expnd-4\expndtw-20
+, \cb1 \kerning1\expnd-4\expndtw-20
+n\cf3 \kerning1\expnd-4\expndtw-20
+=\cf5 \kerning1\expnd-4\expndtw-20
+3\cf3 \kerning1\expnd-4\expndtw-20
+)\
+\pard\pardeftab720\sl680
+
+\f0\fs24 \cf0 \kerning1\expnd-4\expndtw-20
+Those #s are budgets \
+Predict to see which is more effective\
+x1, x2, x3 can be independent or dependent\
+\pard\pardeftab720\sl860
+
+\fs72 \cf0 \kerning1\expnd-4\expndtw-20
+ \
+\pard\pardeftab720
+
+\f2\i\fs86 \cf0 \kerning1\expnd0\expndtw0 E
+\i0 (
+\i Y
+\i0 \uc0\u8722 
+\i Y
+\i0 \'88)
+\fs60 2
+\fs86 =[
+\i f
+\i0 (
+\i X
+\i0 )\uc0\u8722 
+\i f
+\i0 \'88(
+\i X
+\i0 )]
+\fs60 2
+\fs86 +\cf6 \\Var\cf0 (
+\i \uc0\u1013 
+\i0 )
+\f0 \
+\pard\pardeftab720\sl860
+\cf0 \
+\pard\pardeftab720\sl860
+
+\f2 \cf0 [
+\i f
+\i0 (
+\i X
+\i0 )\uc0\u8722 
+\i f
+\i0 \'88(
+\i X
+\i0 )]
+\fs60 2
+\f0\fs86 \
+\pard\pardeftab720\sl860
+
+\fs72 \cf0 \kerning1\expnd-4\expndtw-20
+ is the reducible error, because (at least in theory) 
+\f2\i\fs86 \kerning1\expnd0\expndtw0 f 
+\i0 \'88
+\f0  
+\fs72 \kerning1\expnd-4\expndtw-20
+can be improved.\
+\pard\pardeftab720\sl860
+
+\fs28 \cf0 \kerning1\expnd-4\expndtw-20
+1) Parametric function\
++much easier to estimate parameters\
+- choice of f can be very wrong
+\fs24 \cf3 \
+\pard\pardeftab720\sl680
+\cf0 \kerning1\expnd-4\expndtw-20
+can make parametric more flexible to reduce risk of wrong f, but f^ more complex n noise too closely, thereby overfitting \
+2)  Non-parametric\
+Get f as close as possible to the data points, subject to no being too wiggly or too unsmooth\
++More likely to get f right, esp if f is weird\
+- Far more data is needed\
+\
+Focused w Supervised:  w/ results\
+Mean Squared Error (MSE):\
+MSE = 1/n SUM (yi - f^(xi))^2\
+want it to predict future y\
+\
+Right chart for bottom line is the more fitted squiggly model: Test data\
+Right chart for top line is the parametric line: new data\cf3 \kerning1\expnd-4\expndtw-20
+\
+\pard\pardeftab720\sl680
+
+\f1 \cf3 Excerises: Flexible or inflexible one (simple)\
+Bias vs variance trade off\
+\pard\pardeftab720\sl860\sa280
+
+\f0 \cf0 \kerning1\expnd-4\expndtw-20
+Large sample size with a small number of predictors.	3 predictors age, salary, and life expectancy: unless u know simple is correct; \
+							Flexible 	\
+Small sample size with a large number of predictors.	Flexible not a good idea due to small sample size n missing out of figuring out # of predictors\
+\
+The relationship between the input and output variables is highly non-linear.	Flexible\
+The variance of the irreducible error is very high.	Want simple since ; takes more noise into consideration\
+K-Nearest Neighbours (KNN) \
+HIghly unparametric; very underrated; Guy does like it; Very flexible\
+K = 3, (parameter)\
+knn(    "press tab key" : show functions commands\
+couldn't run the KNN for some reason?\
+Linear regression\
+TV Estimates = if more $ is spend, how much more sales will we get\
+Pr(>|t|) if newspaper is 0.86 (86% is not correct)\
+why if only newspapers and sales then relationship\
+answer: newspaper is ; changes to tv n radio; newspaper is correlated wtih radio\
+highly newspaper budget is the more correlated as higher radio budgets\
+TV is more independent\
+digital media: how to affect the digital media; if not from increase the budget from other things\
+overlap of audience?\
+changes in radio and newspaper\
+doesn't add much to model\
+check the correlation btw them\
+tv n radio has 0.35 correlation\
+TV has highest impact on sales\
+summary(lm(Sales ~ TV + Radio + Newspaper, data = Advertising))\
+"lm'" equals linear model\
+R^2 = 0.8972\
+summary(lm(Sales ~ TV + Radio, data = Advertising))\
+R^2 is training data\
+rarely use linear regression in Guy's work\
+Linear is biase\
+Draw the data: TV vs the data\
+Polynomial models:\
+summary(lm(Sales ~ TV + I(TV^2), data = Advertising))\
+\pard\pardeftab720\sl680
+
+\f1\fs64 \cf7 \kerning1\expnd-4\expndtw-20
+library\cf3 \kerning1\expnd-4\expndtw-20
+(\cf0 \kerning1\expnd-4\expndtw-20
+MASS\cf3 \kerning1\expnd-4\expndtw-20
+)\cf0 \cb2 \kerning1\expnd-4\expndtw-20
+\
+\cf7 \cb1 \kerning1\expnd-4\expndtw-20
+library\cf3 \kerning1\expnd-4\expndtw-20
+(\cf0 \kerning1\expnd-4\expndtw-20
+ISLR\cf3 \kerning1\expnd-4\expndtw-20
+)\cf0 \cb2 \kerning1\expnd-4\expndtw-20
+\
+\pard\pardeftab720\sl680
+\cf8 \cb1 \kerning1\expnd-4\expndtw-20
+# fix(Boston)\
+\
+Excerises\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl860\sa280
+\ls1\ilvl0
+\f0\fs72 \cf0 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\kerning1\expnd-4\expndtw-20
+s there a relationship?\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\kerning1\expnd-4\expndtw-20
+How strong is the relationship?\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\kerning1\expnd-4\expndtw-20
+Is the relationship positive?\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\kerning1\expnd-4\expndtw-20
+What is the predicted 
+\f1 \kerning1\expnd-4\expndtw-20
+mpg
+\f0 \kerning1\expnd-4\expndtw-20
+ associated with a 
+\f1 \kerning1\expnd-4\expndtw-20
+horsepower
+\f0 \kerning1\expnd-4\expndtw-20
+of 98?\
+\pard\pardeftab720\sl680
+
+\f1\fs24 \cf3 \kerning1\expnd-4\expndtw-20
+rst\
+library(ISLR)\
+lm(mpg~\
+lm(formula = mpg ~ horsepower, data = auto)\
+\
+\pard\pardeftab720\sl680
+
+\fs64 \cf3 \kerning1\expnd-4\expndtw-20
+predict(lm(mpg ~horsepower, data = Auto), new data = data.frame(horsepower=98))\
+\pard\pardeftab720\sl680
+
+\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 plot (Auto$horsepower, Auto$mpg)\
+abline(lm(mpg ~ horsepower, data = Auto))\
+fivethirtyeight.com/\
+D3 running a workshop on D3\
+1st workshop\
+d3js.org\
+Load in some data\
+Can plot interactive maps\
+Can explore \
+30th Monday; \
+Invite them to come here\
+Shiny.rstudio.com\
+Have to use Java Script\
+Put analysis into Java script\
+It's free and can use as a server\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 June 18 	Review n Baseball\
+\
+class 4 \
+\
+strings \
+\
+num pie can't store \
+\pard\pardeftab720
+
+\f1\fs32 \cf9 \cb10 df[\cf11 'Age'\cf9 ]\cf12 .\cf9 ix[\cf12 3\cf9 ]  #gets index w/ label 3\
+
+\f0\fs24 \cf0 \cb1 df = data frame\
+\
+df['site'] = 'NYT'\
+\
+Can create site column if it hasn't been created yet\
+\
+player_id = baseball.player + baseball.year.astype(str)\
+\
+add both to create new string\
+\
+baseball_x = baseball.copy()	creating a new data set\
+\
+baseball_x.index = player_id	index is first column; replaced it w/ new id\
+\
+baseball_x.head()		Shows first 6 rows\
+\
+baseball_x.ix['aloumo012007']	# access a record\
+\
+features=[['h','ab']]\
+baseball_x[features]	#save features as var\
+\
+baseball_x.ix['gonzalu012006', ['h','X2b', 'X3b', 'hr']]\
+\
+shows particular features of player; ix queries label\
+\
+baseball_x.ix[['gonzalu012006','finlest012006'], 5:8]	#shows 5 to 8 columns for players\
+\
+baseball_x.ix[:'myersmi012006', 'hr']	# : from before up to that name\
+\
+\
+\
+baseball.year==2006   # check for comparison T or F\
+\
+same thing\
+\
+y2006 = baseball.year==2006\
+\
+hr2006 = baseball[baseball.year==2006].xs('hr', axis=1) #xs is to select specific role; only index\
+\
+# use the baseball.year==2006 as a selection mask, xs to select one column\
+hr2006 = baseball[baseball.year==2006].xs('hr', axis=1)\
+# or\
+hr2006 = baseball[baseball.year==2006]['hr']\
+\
+# by creating our own index so we can compare it with data from 2007\
+hr2006.index = baseball.player[baseball.year==2006]\
+\
+# or all in one statement\
+\
+hr2006 = pd.Series(baseball.hr[y2006==2006].values, \
+                   index=baseball.player[y2006==2006]) \
+ex.\
+\
+y2007 = baseball.year==2007\
+hr2007 = baseball[y2007==2007].xs('hr', axis=1)	#hr = homeruns in 2007\
+hr2007.index = baseball.player[y2007==2007]\
+hr2007\
+\
+# hr2006 = pd.Series(baseball.hr[baseball.year==2006].values, index=baseball.player[baseball.year==2006])\
+type(hr2006)   #data type\
+\
+\pard\pardeftab720\sl340
+
+\f1\fs28 \cf0 pandas.core.series.Series	#result; series module which defines Series class\
+\
+hr_total = hr2006 + hr2007\
+hr_total\
+\
+#NaN   Not a #	when 2006 = 8 2007 = no data\
+		then NaN or when 2006 = 8 2007 = 5 then 13\
+\
+hr_total[hr_total.notnull()] #notnull = True\
+\
+\pard\pardeftab720\sl340\qr
+\cf13 Out[50]:\
+\pard\pardeftab720\sl340
+\cf0 player\
+finlest01     7\
+gonzalu01    30\
+johnsra05     0\
+myersmi01     0\
+schilcu01     0\
+seleaa01      0\
+dtype: float64\
+\
+hr2007.add(hr2006, fill_value=0)\
+\
+baseball.hr - baseball.hr.max()	#how far away from top\
+\
+#max = 1 integer\
+\
+print baseball.ix[89521]["player"]\
+stats = baseball[['h','X2b', 'X3b', 'hr']]\
+diff = stats - stats.xs(89521)\
+diff[:10]\
+\
+#compares everyone else compares w/ that player;\
+\
+#how to find out the best player\
+\
+hr = baseball [['hr','ab']]\
+print hr.sort('hr',ascending=False) # = descending\
+\
+\pard\pardeftab720
+
+\f2\i\fs34 \cf0 SLG
+\i0 =
+\f3  
+\f2 (1
+\i B
+\i0 +(2\'d72
+\i B
+\i0 )+(3\'d73
+\i B
+\i0 )+(4\'d7
+\i HR
+\i0 )
+\f3  )/ 
+\f2\i AB
+\f3\i0 \
+\
+\pard\pardeftab720\sl340
+
+\f1\fs28 \cf0 slg = lambda x: (x['h']-x['X2b']-x['X3b']-x['hr'] + 2*x['X2b'] + 3*x['X3b'] + 4*x['hr'])/(x['ab']+1e-6)\
+\
+#applying to the dataframe\
+baseball[['h','X2b','X3b','\
+\
+Sorting and Ranking\
+\
+baseball_x.sort_index().head()	\
+\
+baseball.hr.order(ascending=False) #use order don't have to sort\
+\
+id\
+89360    35\
+89462    30\
+89521    28\
+89361    26\
+89378    25\
+89489    24\
+89374    21\
+89371    21\
+...\
+89335    0\
+89333    0\
+89177    0\
+88662    0\
+88650    0\
+88649    0\
+88645    0\
+88643    0\
+Name: hr, Length: 100, dtype: int64\
+\
+#sb = stolen base\
+\
+# baseball[['player','sb','cs']].sort_index(ascending=[False,True], by=['sb', 'cs']).head(10)\
+\
+#descending by sb #ascend if same sb\
+\
+# 
+\f3\b Ranking
+\b0  does not re-arrange data, but instead returns an index that ranks each value relative to others in the Series.\
+\
+\pard\pardeftab720\sl400
+\cf0 Alternatively, you can break ties via one of several methods, such as by the order in which they occur in the dataset:\
+\
+baseball.hr.rank(method='first')\
+\
+Missing Data:\
+\
+
+\f1 foo = pd.Series([np.nan, -3, None, 'foobar'])\
+foo\
+\pard\pardeftab720\sl340
+\cf0 \
+\pard\pardeftab720\sl340\qr
+\cf13 Out[65]:\
+\pard\pardeftab720\sl340\qr
+\cf0 0       NaN\
+\pard\pardeftab720\sl340
+\cf0 1        -3\
+2      None\
+3    foobar\
+dtype: object\
+\
+foo.isnull()\
+\
+0     True\
+1    False\
+2     True\
+3    False\
+dtype: bool\
+\
+data.dropna()\
+\
+#gets rid of NaN rows\
+\
+#data.dropna(how='all')\
+\
+only drops if NaN is all of them\
+\
+data.ix[7, 'year'] = np.nan\
+data\
+\
+drops every columns with every value\
+\
+#data\
+\
+Give only mean of the same type\
+\
+#and then do the mean\
+\
+pd.merge(df1, df2)\
+\
+segments.head(1)\
+\
+\
+#right_on	#if there is data \
+\
+#left_on\
+\
+only for segments w/ vessels in them\
+\
+IF there are boats that never set sail, \
+\
+\pard\pardeftab720\sl360
+
+\f3\b\fs36 \cf0 Concatenation\
+\pard\pardeftab720\sl340
+
+\f1\b0\fs28 \cf0 \
+add two lists into 1 big list\
+\
+June 22, 2014		2 to 4pm\
+\
+Baseball \
+\
+Ex. Review w/ Freda\
+\
+Pandas: used for time series data and on data analysis\
+Select data points on all diff. days\
+\
+Sklearn\
+algorithm and math\
+\
+Control + Return : Rerun the entire sheet\
+\
+Shift + Return : Rerun the section\
+\
+#Get rid of \
+\
+#Group by Teams\
+\
+Training data 2011	Testing \
+Test data 2012: \
+\
+Compare? them by rerunning the info. again\
+\
+Teams to consider\
+\
+NY \
+\
+June 23, 2014\
+\
+User based filtering\
+\
+Content based filtering (KNN Classification) Looks as distance \
+\
+Ex. Movies & Users\
+\
+Music Genome Project\
+\
+Required 2 years to do what Pandora has classified 450 distinct features\
+\
+not really related to other literary and other types of domain\
+\
+Collaborative filtering\
+\
+users and items matrix\
+Assumption: same pppl can have similar interests\
+\
+Memory based or model based \
+\
+Model based coll. filtering\
+\
+different types of movies \
+\
+1.  Geared towards males\
+2.  Geared towards females\
+3.  Serious : how to measure? made up\
+4.  Escapist \
+\
+Inspect the user data with the movies \
+\
+Hunch\
+\
+implicit feedback: browsing behavior vs. actual select\
+\
+Item n Global Biase\
+\
+Netflix\
+\
+Very competitive n improve\
+\
+spare data: only 1% data avl\
+\
+boosted decision tree: decision affects the next\
+\
+Run it on data you didn't know act\
+\
+100s models: running random forest, then run PCA, and get sequenced and then run it\
+\
+Recsys.py model\
+\
+takes score of all absolute errors\
+\
+w/ ratings from test data\
+\
+\
+June 30, 2014\
+\
+Autoregressive regression: ex. sunspot ; seasonality; w/ slight variations; prefer to be stationary but can adjust for growth or decline\
+\
+How much to type by autocorrelation?\
+\
+1st chart	50 ob\
+\
+the decline of the osolation\
+\
+\
+2nd chart	500 ob\
+\
+larger wider data with up and down waves but declining in width\
+\
+If not a time series data, have to test for autocorrelation.  Have to pick up new data again.\
+\
+Y values is how predictable it is on the data\
+\
+partial autocorellation is in a wave length cycle but declining or increasing\
+\
+QQ plots\
+\
+it\'92s in mathematical order; can see where the errors are ; around mean are highly competent\
+\
+To improve the closer to the line\
+\
+from 2 features to 9 features; more cyclical\
+\
+is there autocorrelation in our residuals?\
+\
+the autocorelation fits; good model; can then make prediction\
+\
+Based on model: the chart is not as correct; always look at the last 9 pts. ago to predict where the model is going\
+\
+At 9th year, starts to drop off in prob. confidence\
+\
+ARMA model is a simple model\
+\
+Time series: w/ non stationary models: use autogressive integrated moving average or ARCH\
+\
+Non stationary data set but mean and std. dev. fluctuates over time\
+\
+physical are stationary but stock market data/ human behavior is not stationary\
+\
+Can adjust for higher spikes\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+ \
+\
+\
+\pard\pardeftab720
+
+\f0\fs24 \cf0 \
+\
+\
+\
+}
